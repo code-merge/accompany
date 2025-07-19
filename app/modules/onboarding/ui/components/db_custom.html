@@ -1,0 +1,183 @@
+{% from "input.html" import input %}
+{% from "button.html" import button %}
+
+{% set db_name_ip_error = _("db_name_ip_error") %}
+{% set host_ip_error = _("host_ip_error") %}
+{% set port_ip_error = _("port_ip_error") %}
+{% set user_ip_error = _("user_ip_error") %}
+{% set password_ip_error = _("password_ip_error") %}
+{% set ssl_cert_ip_error = _("ssl_cert_ip_error") %}
+{% set ssl_cert_type_error = _("ssl_cert_type_error") %}
+
+
+<div x-data="{
+  form: {
+    db_name: '{{ form.db_name|default('') }}',
+    host: '{{ form.host|default('') }}',
+    port: '{{ form.port|default('') }}',
+    user: '{{ form.user|default('') }}',
+    password: '{{ form.password|default('') }}',
+    ssl: {{ 'true' if form.ssl else 'false' }}
+  },
+  errors: {{ (errors or {}) | tojson }},
+  errorMessages: {
+    db_name: '{{ db_name_ip_error }}',
+    host: '{{ host_ip_error }}',
+    port: '{{ port_ip_error }}',
+    user: '{{ user_ip_error }}',
+    password: '{{ password_ip_error }}',
+    ssl_cert: '{{ ssl_cert_ip_error }}',
+    ssl_type: '{{ ssl_cert_type_error }}'
+  },
+  validateAndSubmit() {
+    this.errors.db_name = this.form.db_name.trim() ? null : this.errorMessages.db_name;
+    this.errors.host = this.form.host.trim() ? null : this.errorMessages.host;
+    this.errors.port = (this.form.port + '').trim() && !isNaN(this.form.port) ? null : this.errorMessages.port;
+    this.errors.user = this.form.user.trim() ? null : this.errorMessages.user;
+    this.errors.password = this.form.password.trim() ? null : this.errorMessages.password;
+
+    if (this.form.ssl) {
+      const files = $refs.ssl_cert?.files || [];
+      this.errors.ssl_cert = files.length === 0
+        ? this.errorMessages.ssl_cert
+        : (!files[0].name.toLowerCase().endsWith('.pem')
+           ? this.errorMessages.ssl_type
+           : null);
+    } else {
+      this.errors.ssl_cert = null;
+    }
+
+    if (!Object.values(this.errors).some(e => e)) {
+      $refs.dbForm.submit();
+    }
+  }
+}" class="h-full flex flex-col justify-between">
+  <form method="post" action="{{ request.url_for('dbsetup_custom') }}" enctype="multipart/form-data" x-ref="dbForm"
+    novalidate>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      {{ input(
+      'db_name',
+      'db_name_input',
+      placeholder= 'accompany_db',
+      value=form.db_name,
+      error=errors.db_name,
+      required=true,
+      attrs={
+      'x-model': 'form.db_name',
+      'x-on:input': "errors.db_name = null",
+      'x-on:blur': "errors.db_name = form.db_name.trim() ? null : errorMessages.db_name"
+      }
+      ) }}
+
+      {{ input(
+      'host',
+      'db_host_input',
+      placeholder= 'localhost or 127.0.0.1',
+      value=form.host,
+      error=errors.host,
+      required=true,
+      attrs={
+      'x-model': 'form.host',
+      'x-on:input': "errors.host = null",
+      'x-on:blur': "errors.host = form.host.trim() ? null : errorMessages.host"
+      }
+      ) }}
+
+      {{ input(
+      'port',
+      'db_port_input',
+      placeholder= '5043',
+      type='number',
+      value=form.port,
+      error=errors.port,
+      required=true,
+      attrs={
+      'x-model': 'form.port',
+      'x-on:input': "errors.port = null",
+      'x-on:blur': "errors.port = (form.port+'').trim() && !isNaN(form.port) ? null : errorMessages.port"
+      }
+      ) }}
+
+      {{ input(
+      'user',
+      'db_user_input',
+      placeholder= 'admin',
+      value=form.user,
+      error=errors.user,
+      required=true,
+      attrs={
+      'x-model': 'form.user',
+      'x-on:input': "errors.user = null",
+      'x-on:blur': "errors.user = form.user.trim() ? null : errorMessages.user"
+      }
+      ) }}
+
+      {{ input(
+      'password',
+      'db_password_input',
+      placeholder= 'password',
+      type='password',
+      value=form.password,
+      error=errors.password,
+      required=true,
+      attrs={
+      'x-model': 'form.password',
+      'x-on:input': "errors.password = null",
+      'x-on:blur': "errors.password = form.password.trim() ? null : errorMessages.password"
+      }
+      ) }}
+
+      <div class="flex flex-col gap-2 pt-1">
+        <label class="inline-flex items-center gap-2 text-sm font-medium">
+          <input id="ssl" name="ssl" type="checkbox"
+            class="w-5 h-5 transition checked:bg-[var(--accent)] focus:ring-2 focus:ring-[var(--ring)]"
+            x-model="form.ssl" @change="errors.ssl_cert = null" />
+          {{ _(db_ssl_checkbox) }}
+        </label>
+
+        <template x-if="form.ssl">
+          <div>
+            {{ input(
+            "ssl_cert",
+            "",
+            type="file",
+            error=errors.ssl_cert,
+            attrs={
+            'name': 'ssl_cert',
+            'x-ref': 'ssl_cert',
+            'x-on:input': 'errors.ssl_cert = null',
+            'class': 'w-full'
+            }
+            ) }}
+          </div>
+        </template>
+      </div>
+    </div>
+
+  </form>
+
+  <!-- Navigation buttons (outside form) -->
+  <div class="flex justify-evenly w-full mt-6">
+    {{ button(
+    label="onboarding_back_btn",
+    variant="outline",
+    size="xlg",
+    attrs={
+    "hx-get": "/onboarding/licence",
+    "hx-target": "#onboarding-shell",
+    "hx-swap": "innerHTML",
+    "hx-push-url": "true"
+    }
+    ) }}
+
+    {{ button(
+    label="onboarding_next_btn",
+    variant="primary",
+    size="xlg",
+    attrs={ "@click": "validateAndSubmit()" }
+    ) }}
+  </div>
+
+</div>

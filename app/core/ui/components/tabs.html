@@ -1,0 +1,51 @@
+{% macro tabs(
+id="tabs",
+tabs=[],
+selected=0,
+size="md",
+variant="ghost",
+extra_classes="",
+content_id=None,
+attrs={}
+) %}
+
+{% set content_id = content_id or id ~ "-content" %}
+
+{% set size_map = {
+"sm": "h-8 px-3 text-sm",
+"md": "h-9 px-4 text-base",
+"lg": "h-10 px-5 text-lg"
+} %}
+
+{% set variant_map = {
+"ghost": "bg-transparent",
+"underline": "border-b-2 border-transparent data-[active]:border-[var(--primary)]",
+"solid": "bg-[var(--muted)] text-[var(--foreground)] rounded-[var(--radius)]"
+} %}
+
+
+<div id="{{ id }}" x-data="{ selected: {{ selected }} }" role="tablist"
+  class="flex flex-col space-y-4 {{ extra_classes }}" {{ attrs|xmlattr }}>
+
+  {# Tab Navigation #}
+  <div class="flex gap-2 no-scrollbar hide-scrollbar">
+    {% for tab in tabs %}
+    <button type="button" role="tab" :aria-selected="selected === {{ loop.index0 }}"
+      @click="selected = {{ loop.index0 }}" hx-get="{{ tab.url }}" hx-target="#{{ content_id }}" hx-swap="innerHTML"
+      :class="selected === {{ loop.index0 }}
+              ? 'bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] shadow-sm'
+              : 'bg-[var(--muted)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] border border-transparent'"
+      class="transition-all duration-200 ease-in-out whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 {{ size_map[size] }} {{ variant_map[variant] }}">
+      {{ _(tab.label) }}
+    </button>
+    {% endfor %}
+  </div>
+
+  {# Tab Content #}
+  <div id="{{ content_id }}" role="tabpanel" tabindex="0"
+    class="flex flex-col justify-between h-full rounded-[var(--radius)] border border-[var(--border)] bg-[var(--card)] p-4 text-[var(--card-foreground)] transition-all">
+    {{ tabs[selected].content | safe }}
+  </div>
+
+</div>
+{% endmacro %}

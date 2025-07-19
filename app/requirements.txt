@@ -13,6 +13,7 @@ psycopg
 # Utility Dependencies
 passlib
 bcrypt
+python-multipart
 
 # Testing dependencies:
 pytest 

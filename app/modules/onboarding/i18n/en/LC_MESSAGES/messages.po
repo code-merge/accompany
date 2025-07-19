@@ -76,3 +76,56 @@ msgstr "Licence Agreement"
 
 msgid "onboarding_licence_accept"
 msgstr "I have read and accept the license terms"
+
+# Database Setup
+
+msgid "onboarding_dbsetup_title"
+msgstr "Database Setup"
+
+msgid "onboarding_dbsetup_desc"
+msgstr "Setup the database for Accompany to work. You can either create a database or connect to an existing database"
+
+msgid "onboarding_db_type_std"
+msgstr "Standard"
+
+msgid "onboarding_db_type_custom"
+msgstr "Custom"
+
+msgid "db_name_input"
+msgstr "Database Name"
+
+msgid "db_host_input"
+msgstr "Host"
+
+msgid "db_port_input"
+msgstr "Port"
+
+msgid "db_user_input"
+msgstr "Database User"
+
+msgid "db_password_input"
+msgstr "Password"
+
+msgid "db_ssl_checkbox"
+msgstr "Use SSL"
+
+msgid "db_name_ip_error"
+msgstr "Database name is required"
+
+msgid "host_ip_error"
+msgstr "Host is required"
+
+msgid "port_ip_error"
+msgstr "Valid port is required"
+
+msgid "user_ip_error"
+msgstr "User is required"
+
+msgid "password_ip_error"
+msgstr "Password is required"
+
+msgid "ssl_cert_ip_error"
+msgstr "SSL certificate is required"
+
+msgid "ssl_cert_type_error"
+msgstr "Only .pem certificate files are allowed"

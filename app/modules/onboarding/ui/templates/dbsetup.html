@@ -1,0 +1,25 @@
+{# app/modules/onboarding/ui/templates/dbsetup.html #}
+{% from "tabs.html" import tabs as render_tabs %}
+
+<div class="flex w-full h-full p-2 gap-x-4">
+
+    <!-- Sidebar -->
+    <div class="w-1/4 border-[var(--border)]">
+        {% include "components/sidebar.html" %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-3/4">
+
+        <div class="h-full w-full flex flex-col items-center gap-y-4">
+
+            <h2 class="text-xl font-bold">{{ _("onboarding_dbsetup_title") }}</h2>
+
+            <p class="font-sans text-sm">{{ _("onboarding_dbsetup_desc") }}</p>
+
+            {{ render_tabs("db-tabs", tab_list, selected, variant="solid", extra_classes="w-full h-full") }}
+        </div>
+
+    </div>
+
+</div>
