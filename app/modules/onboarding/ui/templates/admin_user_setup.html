@@ -1,0 +1,146 @@
+{% from "input.html" import input %}
+{% from "button.html" import button %}
+
+<div class="flex w-full h-full gap-x-4 p-2">
+
+  <!-- Sidebar -->
+  <div class="w-1/4 border-[var(--border)]">
+    {% include "components/sidebar.html" %}
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-3/4">
+    <div class="h-full flex flex-col items-center gap-y-6 w-full">
+
+      <h2 class="text-xl font-bold">{{ _("onboarding_usersetup_title") }}</h2>
+
+      <p class="font-sans text-sm">{{ _("onboarding_usersetup_desc") }}</p>
+
+      <div class="h-full w-full px-8 py-4 border border-[var(--border)] rounded-md">
+
+        {% set full_name_error = _("admin_full_name_error") %}
+        {% set email_required_error = _("admin_email_required_error") %}
+        {% set email_invalid_error = _("admin_email_invalid_error") %}
+        {% set password_length_error = _("admin_password_length_error") %}
+        {% set password_match_error = _("admin_password_match_error") %}
+        {% set profile_picture_type_error = _("admin_profile_picture_type_error") %}
+
+        <div x-data="{
+                    form: {
+                    full_name:        '{{ form.full_name|default('') }}',
+                    email:            '{{ form.email|default('') }}',
+                    password:         '',
+                    confirm_password: ''
+                    },
+                    errors: {{ (errors or {}) | tojson }},
+                    errorMessages: {
+                    full_name: '{{ full_name_error }}',
+                    email_required: '{{ email_required_error }}',
+                    email_invalid: '{{ email_invalid_error }}',
+                    password_length: '{{ password_length_error }}',
+                    password_match: '{{ password_match_error }}',
+                    profile_picture_type: '{{ profile_picture_type_error }}'
+                  }
+                }" x-init="errors.profile_picture = null" class="h-full">
+
+          <form hx-post="{{ request.url_for('admin-user-setup') }}" hx-target="#onboarding-shell" hx-push-url="true"
+            enctype="multipart/form-data" @submit="errors.profile_picture = null;
+              errors.full_name = form.full_name.trim() ? null : errorMessages.full_name;
+              errors.email = form.email.trim()
+                ? (form.email.includes('@') && form.email.includes('.') ? null : errorMessages.email_invalid)
+                : errorMessages.email_required;
+              errors.password = form.password.length >= 8 ? null : errorMessages.password_length;
+              errors.confirm_password = form.password === form.confirm_password ? null : errorMessages.password_match;
+
+              if (Object.values(errors).some(v => v)) $event.preventDefault();
+            " class="h-full flex flex-col justify-between">
+            <!-- Responsive 2-column grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {{ input("full_name",
+              "admin_setup_name_input",
+              required=true,
+              error=errors.full_name,
+              placeholder= 'John Doe',
+              attrs={
+              'x-model': 'form.full_name',
+              'x-on:input': "errors.full_name = null",
+              'x-on:blur': "errors.full_name = form.full_name.trim() ? null : errorMessages.full_name"
+              }) }}
+
+              {{ input("email", "admin_setup_email_input", type="email", required=true, error=errors.email,
+              placeholder= 'johndoe@mail.com',
+              attrs={
+              'x-model': 'form.email',
+              'x-on:input': "errors.email = null",
+              'x-on:blur': "errors.email = form.email.trim()"
+              + " ? ((form.email.includes('@') && form.email.includes('.'))"
+              + " ? null"
+              + " : errorMessages.email_invalid)"
+              + " : errorMessages.email_required"
+              }) }}
+
+              {{ input("password", "admin_setup_password_input", type="password", required=true, error=errors.password,
+              placeholder= 'password',
+              attrs={
+              'x-model': 'form.password',
+              'x-on:input': "errors.password = null",
+              'x-on:blur': "errors.password = form.password.length>=8"
+              + " ? null"
+              + " : errorMessages.password_length"
+              }) }}
+
+              {{ input("confirm_password", "admin_setup_con_password_input", type="password", required=true,
+              error=errors.confirm_password,
+              placeholder= 'retype password',
+              attrs={
+              'x-model': 'form.confirm_password',
+              'x-on:input': "errors.confirm_password = null",
+              'x-on:blur': "errors.confirm_password = form.password===form.confirm_password"
+              + " ? null"
+              + " : errorMessages.password_match"
+              }) }}
+
+              <!-- Profile Picture spans full width -->
+              <div class="md:col-span-2">
+                {{ input("profile_picture", "admin_setup_prof_pic_input", type="file", required=false,
+                attrs={
+                'x-on:change': "
+                const f = $event.target.files[0] || {};
+                const ext = (f.name||'').split('.').pop().toLowerCase();
+                errors.profile_picture = f.name
+                ? (['jpg','jpeg','png','gif'].includes(ext)
+                ? null
+                : errorMessages.profile_picture_type)
+                : null
+                "
+                }) }}
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-evenly w-full mt-8">
+              {{ button(
+              label="onboarding_back_btn",
+              variant="outline",
+              size="xlg",
+              attrs={
+              "hx-get": "/onboarding/db-setup",
+              "hx-target": "#onboarding-shell",
+              "hx-swap": "innerHTML",
+              "hx-push-url": "true"
+              }
+              ) }}
+
+              {{ button(
+              label="onboarding_next_btn",
+              type="submit",
+              variant="primary",
+              size="xlg",
+              ) }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -129,3 +129,44 @@ msgstr "SSL certificate is required"
 
 msgid "ssl_cert_type_error"
 msgstr "Only .pem certificate files are allowed"
+
+# Admin User Setup
+
+msgid "onboarding_usersetup_title"
+msgstr "Admin User Setup"
+
+msgid "onboarding_usersetup_desc"
+msgstr "Setup the admin user for Accompany."
+
+msgid "admin_setup_name_input"
+msgstr "Full Name"
+
+msgid "admin_setup_email_input"
+msgstr "Email"
+
+msgid "admin_setup_password_input"
+msgstr "Password"
+
+msgid "admin_setup_con_password_input"
+msgstr "Confirm Password"
+
+msgid "admin_setup_prof_pic_input"
+msgstr "Profile Picture (Optional)"
+
+msgid "admin_full_name_error"
+msgstr "Full name is required"
+
+msgid "admin_email_required_error"
+msgstr "Email is required"
+
+msgid "admin_email_invalid_error"
+msgstr "Enter a valid email address"
+
+msgid "admin_password_length_error"
+msgstr "Password must be at least 8 characters"
+
+msgid "admin_password_match_error"
+msgstr "Passwords do not match"
+
+msgid "admin_profile_picture_type_error"
+msgstr "Allowed: .jpg .jpeg .png .gif"
