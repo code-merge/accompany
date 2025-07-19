@@ -1,0 +1,24 @@
+# Core dependencies
+fastapi
+uvicorn
+Jinja2
+pydantic-settings
+
+# Database Dependencies
+itsdangerous
+asyncpg
+sqlalchemy
+psycopg
+
+# Utility Dependencies
+passlib
+bcrypt
+
+# Testing dependencies:
+pytest 
+pytest-asyncio 
+httpx 
+coverage
+
+#for localization:
+polib

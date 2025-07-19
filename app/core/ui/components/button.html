@@ -1,0 +1,52 @@
+{# app/core/ui/components/button.html #}
+{% from "icon.html" import icon as render_icon %}
+
+{% macro button(
+label="",
+icon_name="",
+icon_path=None,
+size="md",
+variant="primary",
+type="button",
+disabled=false,
+loading=false,
+extra_classes="",
+disabled_class="cursor-not-allowed",
+attrs={}
+) %}
+{% set size_map = {
+"sm": "h-9 px-3 text-sm rounded-md",
+"md": "h-10 px-4 py-2 text-base rounded-md",
+"lg": "h-11 px-8 text-lg rounded-md",
+"xlg": "h-12 px-10 text-lg rounded-md",
+"icon": "h-10 w-10 p-0 rounded-md"
+} %}
+
+{% set variant_map = {
+"primary": "bg-[var(--primary)] text-[var(--primary-foreground)] hover:bg-[var(--primary)]/90",
+"secondary": "bg-[var(--secondary)] text-[var(--secondary-foreground)] hover:bg-[var(--secondary)]/80",
+"destructive": "bg-[var(--destructive)] text-[var(--destructive-foreground)] hover:bg-[var(--destructive)]/90",
+"outline": "border border-[var(--border)] bg-transparent hover:bg-[var(--muted)] hover:text-[var(--foreground)]",
+"ghost": "bg-transparent hover:bg-[var(--muted)] text-[var(--foreground)]",
+"link": "text-[var(--primary)] underline-offset-4 hover:underline"
+} %}
+
+{% set base_classes = "inline-flex items-center justify-center font-medium whitespace-nowrap transition-all duration-200
+ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2
+disabled:pointer-events-none disabled:opacity-50 rounded-[var(--radius)]" %}
+
+{% if disabled and disabled_class %}
+{% set extra_classes = extra_classes ~ " " ~ disabled_class %}
+{% endif %}
+
+<button type="{{ type }}" class="{{ base_classes }} {{ size_map[size] }} {{ variant_map[variant] }} {{ extra_classes }}"
+  aria-label="{{ _(label) }}" role="button" {% if disabled or loading %}disabled{% endif %} {{ attrs|xmlattr }}>
+  {% if loading %}
+  <span class="inline-block w-4 h-4 mr-2 border-2 border-current border-t-transparent rounded-full animate-spin"
+    aria-hidden="true"></span>
+  {% elif icon_name %}
+  {{ render_icon(name=icon_name, path=icon_path, size="1rem", extra_classes="mr-2") }}
+  {% endif %}
+  <span class="btn-label">{{ _(label) }}</span>
+</button>
+{% endmacro %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" x-data="{ dark: false }" :class="dark && 'dark'"
+    x-init="dark = localStorage.theme === 'dark'">
+
+<head>
+    <meta charset="utf-8">
+    <title>Accompay</title>
+    <meta name="description" content="An Opensource ERP" />
+
+    <link rel="stylesheet" href="{{ url_for('static', path='css/app.css') }}" />
+    <link rel="icon" href="{{ url_for('static', path='favicon/icon.ico') }}" />
+    <script src="{{ url_for('libs', path='htmx.min.js') }}"></script>
+    <script defer src="{{ url_for('libs', path='alpinejs.min.js') }}"></script>
+
+</head>
+
+<body class="min-h-screen">
+    <!-- Main Content -->
+    {% block content %}{% endblock %}
+</body>
+
+</html>
