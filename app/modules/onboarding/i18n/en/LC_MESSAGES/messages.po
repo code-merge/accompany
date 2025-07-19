@@ -239,3 +239,11 @@ msgstr "Language is required"
 
 msgid "system_theme_required_error"
 msgstr "Theme is required"
+
+# Finish Setup
+
+msgid "onboarding_finish_title"
+msgstr "Finishing Up...."
+
+msgid "onboarding_review_text"
+msgstr "Review & Confirm"
