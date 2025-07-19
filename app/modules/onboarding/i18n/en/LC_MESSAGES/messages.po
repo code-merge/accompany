@@ -170,3 +170,28 @@ msgstr "Passwords do not match"
 
 msgid "admin_profile_picture_type_error"
 msgstr "Allowed: .jpg .jpeg .png .gif"
+
+# Company Setup
+msgid "onboarding_companysetup_title"
+msgstr "Company Setup"
+
+msgid "onboarding_companysetup_desc"
+msgstr "Setup the organizational details."
+
+msgid "company_name_input"
+msgstr "Company Name"
+
+msgid "company_industry_input"
+msgstr "Industry"
+
+msgid "company_logo_input"
+msgstr "Company Logo (optional)"
+
+msgid "company_name_required_error"
+msgstr "Company name is required"
+
+msgid "industry_required_error"
+msgstr "Industry is required"
+
+msgid "company_logo_type_error"
+msgstr "Allowed: .jpg .jpeg .png .gif .svg"

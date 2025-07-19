@@ -8,4 +8,8 @@ steps = [
     {"icon": load_svg(ICON_DIR / "copyright.svg"), "title": "onboarding_licence", "description": "onboarding_licence_desc"},
     {"icon": load_svg(ICON_DIR / "database.svg"), "title": "onboarding_database_setup", "description": "onboarding_database_setup_desc"},
     {"icon": load_svg(ICON_DIR / "admin_user.svg"), "title": "onboarding_admin_user_setup", "description": "onboarding_admin_user_setup_desc"},
+    {"icon": load_svg(ICON_DIR / "company.svg"), "title": "onboarding_company_setup", "description": "onboarding_company_setup_desc"},
 ]
+
+
+INDUSTRIES = ["Educational", "Manufacturing", "Technology", "Healthcare", "Retail", "Law"]

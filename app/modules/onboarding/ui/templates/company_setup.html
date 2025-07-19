@@ -1,0 +1,115 @@
+{% from "input.html" import input %}
+{% from "button.html" import button %}
+{% from "select.html" import select %}
+
+
+<div class="flex w-full h-full p-2 gap-x-4">
+
+  <!-- Sidebar -->
+  <div class="w-1/4 border-[var(--border)]">
+    {% include "components/sidebar.html" %}
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-3/4">
+    <div class="h-full flex flex-col items-center gap-y-6 w-full">
+
+      <h2 class="text-xl font-bold">{{ _("onboarding_companysetup_title") }}</h2>
+
+      <p class="font-sans text-sm">{{ _("onboarding_companysetup_desc") }}</p>
+
+      <div class="w-full h-full px-8 py-4 border border-[var(--border)] rounded-md">
+
+        {% set company_name_required_error = _("company_name_required_error") %}
+        {% set industry_required_error = _("industry_required_error") %}
+        {% set company_logo_type_error = _("company_logo_type_error") %}
+
+        <div x-data="{
+            form: {
+              company_name: '{{ form.company_name|default('') }}',
+              industry:     '{{ form.industry|default('') }}'
+            },
+            errors: {{ (errors or {}) | tojson }},
+            errorMessages: {
+            company_name: '{{ company_name_required_error }}',
+            industry: '{{ industry_required_error }}',
+            company_logo: '{{ company_logo_type_error }}'
+          }
+          }" x-init="errors.company_logo = null" class="h-full">
+          <form hx-post="{{ request.url_for('company-setup') }}" hx-target="#onboarding-shell" hx-push-url="true"
+            enctype="multipart/form-data" @submit="
+              errors.company_logo = null;
+
+              errors.company_name = form.company_name.trim()
+              ? null
+              : errorMessages.company_name;
+
+              errors.industry = form.industry.trim()
+              ? null
+              : errorMessages.industry;
+
+              (errors.company_name || errors.industry)
+                && $event.preventDefault()
+            " class="h-full flex flex-col justify-between">
+            <!-- 2-column layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {{ input("company_name", "company_name_input", required=true, error=errors.company_name, attrs={
+              'x-model': 'form.company_name',
+              'x-on:input': "errors.company_name = null",
+              'x-on:blur': "errors.company_name = form.company_name.trim() ? null : errorMessages.company_name"
+              }) }}
+
+              <!-- Industry dropdown -->
+              <div>
+                {{ select("industry", "company_industry_input", required=true, value=form.industry, error=errors.industry,
+                options=industry_options, attrs={
+                'x-model': 'form.industry',
+                'x-on:input': 'errors.industry = null',
+                'x-on:blur': "errors.industry = form.industry.trim() ? null : errorMessages.industry"
+                }) }}
+              </div>
+
+              <!-- File input spans full width -->
+              <div class="md:col-span-2">
+                {{ input("company_logo", "company_logo_input", type="file", required=false,
+                error=errors.company_logo, attrs={
+                'x-on:change': "
+                const f = $event.target.files[0]||{};
+                const ext = (f.name||'').split('.').pop().toLowerCase();
+                errors.company_logo = f.name
+                ? (['jpg','jpeg','png','gif','svg'].includes(ext)
+                ? null
+                : errorMessages.company_logo)
+                : null
+                "
+                }) }}
+              </div>
+            </div>
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-evenly w-full mt-8">
+              {{ button(
+              label="onboarding_back_btn",
+              variant="outline",
+              size="xlg",
+              attrs={
+              "hx-get": "/onboarding/admin-user-setup",
+              "hx-target": "#onboarding-shell",
+              "hx-swap": "innerHTML",
+              "hx-push-url": "true"
+              }
+              ) }}
+
+              {{ button(
+              label="onboarding_next_btn",
+              type="submit",
+              variant="primary",
+              size="xlg",
+              ) }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
