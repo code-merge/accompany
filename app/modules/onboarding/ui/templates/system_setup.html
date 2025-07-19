@@ -1,0 +1,156 @@
+{% from "input.html" import input %}
+{% from "button.html" import button %}
+{% from "select.html" import select %}
+
+<div class="flex w-full h-full p-2 gap-x-4">
+
+    <!-- Sidebar -->
+    <div class="w-1/4 border-[var(--border)]">
+        {% include "components/sidebar.html" %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-3/4">
+        <div class="h-full flex flex-col items-center gap-y-6 w-full">
+
+      <h2 class="text-xl font-bold">{{ _("onboarding_systemsetup_title") }}</h2>
+
+      <p class="font-sans text-sm">{{ _("onboarding_systemsetup_desc") }}</p>
+
+            <div class="w-full h-full px-8 py-4 border border-[var(--border)] rounded-md">
+
+                {% set country_required_error = _("system_country_required_error") %}
+                {% set currency_required_error = _("system_currency_required_error") %}
+                {% set timezone_required_error = _("system_timezone_required_error") %}
+                {% set language_required_error = _("system_language_required_error") %}
+                {% set theme_required_error = _("system_theme_required_error") %}
+
+
+                <div x-data='{
+            countries:    {{ country_options|tojson }},
+            currencies:   {{ currencies|tojson }},
+            timezones:    {{ timezones|tojson }},
+            languages:    {{ languages|tojson }},
+            themes:       {{ themes|tojson }},
+            modules:      {{ modules|tojson }},
+            form:         {{ form|tojson }},
+            errors: {{ (errors or {}) | tojson }},
+            errorMessages: {
+                country_code: "{{ country_required_error }}",
+                currency: "{{ currency_required_error }}",
+                timezone: "{{ timezone_required_error }}",
+                language: "{{ language_required_error }}",
+                theme: "{{ theme_required_error }}"
+                }
+          }' x-init="
+            form.modules = form.modules || [];
+            const sel = countries.find(c => c.value === form.country_code) || {};
+            form.currency = form.currency || sel.currency || '';
+            form.timezone = form.timezone || sel.timezone || '';" class="h-full">
+                    <form hx-post="{{ request.url_for('system-setup') }}" hx-target="#onboarding-shell"
+                        hx-push-url="true" @submit="
+                        errors = {
+                        country_code:null, currency:null,
+                        timezone:null, language:null, theme:null
+                        };
+
+                        errors.country_code = form.country_code ? null : errorMessages.country_code;
+                        errors.currency     = form.currency     ? null : errorMessages.currency;
+                        errors.timezone     = form.timezone     ? null : errorMessages.timezone;
+                        errors.language     = languages.includes(form.language) ? null : errorMessages.language;
+                        errors.theme        = themes.includes(form.theme) ? null : errorMessages.theme;
+
+                        Object.values(errors).some(v => v) && $event.preventDefault();"
+                        class="h-full flex flex-col justify-between">
+
+                        <!-- Responsive 2-column grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {{ select("country_code", "system_country_input", required=true, value=form.country_code,
+                            error=errors.country_code, options=country_options, attrs={
+                            'x-model': 'form.country_code',
+                            'x-on:change': 'const sel = countries.find(c => c.value === form.country_code) || {};
+                            form.currency = sel.currency; form.timezone = sel.timezone; errors.country_code = null',
+                            'x-on:blur': "errors.country_code = form.country_code ? null : errorMessages.country_code"
+                            }) }}
+
+                            {{ select("currency", "system_currency_input", required=true, value=form.currency, error=errors.currency,
+                            options=currencies, attrs={
+                            'x-model': 'form.currency',
+                            'readonly': 'true',
+                            'x-on:blur': "errors.currency = form.currency ? null : errorMessages.currency"
+                            }) }}
+
+                            {{ select("timezone", "system_timezone_input", required=true, value=form.timezone, error=errors.timezone,
+                            options=timezones, attrs={
+                            'x-model': 'form.timezone',
+                            'readonly': 'true',
+                            'x-on:blur': "errors.timezone = form.timezone ? null : errorMessages.timezone"
+                            }) }}
+
+                            {{ select("language", "system_language_input", required=true, value=form.language,
+                            error=errors.language, options=languages, attrs={
+                            'x-model': 'form.language',
+                            'x-on:blur': "errors.language = form.language ? null : errorMessages.language"
+                            }) }}
+
+                            {{ select("theme", "system_theme_input", required=true, value=form.theme, error=errors.theme,
+                            options=themes, attrs={
+                            'x-model': 'form.theme',
+                            'x-on:blur': "errors.theme = form.theme ? null : errorMessages.theme"
+                            }) }}
+
+                            <!-- Multi-select for starter modules (full width) -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium mb-1">
+                                    {{ _("system_modules_input") }}
+                                </label>
+                                <details class="relative">
+                                    <summary
+                                        class="block w-full rounded border px-3 py-2 text-sm cursor-pointer focus:outline-none focus:ring"
+                                        x-text="(form.modules && form.modules.length) ? form.modules.join(', ') : '{{ _('system_modules_select') }}'">
+                                    </summary>
+                                    <ul
+                                        class="absolute z-10 mt-1 w-full bg-[var(--background)] border rounded shadow max-h-60 overflow-auto">
+                                        <template x-for="mod in modules" :key="mod">
+                                            <li class="p-2 hover:bg-[var(--primary)]/90">
+                                                <label class="inline-flex items-center w-full">
+                                                    <input type="checkbox" name="modules" :value="mod"
+                                                        x-model="form.modules"
+                                                        class="rounded border-[var(--input)] text-[var(--primary-foreground)] focus:ring-[var(--ring)]" />
+                                                    <span class="ml-2" x-text="mod"></span>
+                                                </label>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </details>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Buttons -->
+                        <div class="flex justify-evenly w-full mt-8">
+                            {{ button(
+                            label="onboarding_back_btn",
+                            variant="outline",
+                            size="xlg",
+                            attrs={
+                            "hx-get": "/onboarding/company-setup",
+                            "hx-target": "#onboarding-shell",
+                            "hx-swap": "innerHTML",
+                            "hx-push-url": "true"
+                            }
+                            ) }}
+
+                            {{ button(
+                            label="onboarding_next_btn",
+                            type="submit",
+                            variant="primary",
+                            size="xlg",
+                            ) }}
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

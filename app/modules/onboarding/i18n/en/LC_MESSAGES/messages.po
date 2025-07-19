@@ -195,3 +195,47 @@ msgstr "Industry is required"
 
 msgid "company_logo_type_error"
 msgstr "Allowed: .jpg .jpeg .png .gif .svg"
+
+# System Setup
+
+msgid "onboarding_systemsetup_title"
+msgstr "System Setup"
+
+msgid "onboarding_systemsetup_desc"
+msgstr "Setup the system to your needs."
+
+msgid "system_country_input"
+msgstr "Country"
+
+msgid "system_currency_input"
+msgstr "Currency"
+
+msgid "system_timezone_input"
+msgstr "Timezone"
+
+msgid "system_language_input"
+msgstr "System Language"
+
+msgid "system_theme_input"
+msgstr "System Theme"
+
+msgid "system_modules_input"
+msgstr "Starter Modules"
+
+msgid "system_modules_select"
+msgstr "Select modules…"
+
+msgid "system_country_required_error"
+msgstr "Country is required"
+
+msgid "system_currency_required_error"
+msgstr "Currency is required"
+
+msgid "system_timezone_required_error"
+msgstr "Timezone is required"
+
+msgid "system_language_required_error"
+msgstr "Language is required"
+
+msgid "system_theme_required_error"
+msgstr "Theme is required"
