@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Onboarding 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+# Sidebar
+
+msgid "onboarding_welcome"
+msgstr "Welcome"
+
+msgid "onboarding_licence"
+msgstr "Licence"
+
+msgid "onboarding_language_theme"
+msgstr "Language & Theme"
+
+msgid "onboarding_database_setup"
+msgstr "Database Setup"
+
+msgid "onboarding_admin_user_setup"
+msgstr "Admin User Setup"
+
+msgid "onboarding_company_setup"
+msgstr "Company Setup"
+
+msgid "onboarding_system_setup"
+msgstr "System Setup"
+
+msgid "onboarding_finish"
+msgstr "Finish"
+
+msgid "onboarding_welcome_desc"
+msgstr "Welcome to the syetem setup"
+
+msgid "onboarding_licence_desc"
+msgstr "Licence Agreement"
+
+msgid "onboarding_language_theme_desc"
+msgstr "Choose your preferred language"
+
+msgid "onboarding_database_setup_desc"
+msgstr "Configure your database"
+
+msgid "onboarding_admin_user_setup_desc"
+msgstr "Create your admin user"
+
+msgid "onboarding_company_setup_desc"
+msgstr "Set up company details"
+
+msgid "onboarding_system_setup_desc"
+msgstr "Setup your system"
+
+msgid "onboarding_finish_desc"
+msgstr "You're ready to roll!"
+
+# Action buttons
+msgid "onboarding_next_btn"
+msgstr "Next"
+
+msgid "onboarding_back_btn"
+msgstr "Back"
+
+msgid "onboarding_finish_btn"
+msgstr "Finish Setup"
+
+# Welcome Page
+
+msgid "onboarding_welcome_msg"
+msgstr "Welcome to the Accompany ERP installation wizard! Get ready to transform your business operations. This easy-to-follow guide will help you set up Accompany efficiently, so you can start enjoying increased productivity, better data management, and informed decision-making."

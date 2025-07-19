@@ -1,0 +1,65 @@
+{% from "icon.html" import icon %}
+
+<div class="bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 h-full w-full flex items-center">
+  <div class="relative flex flex-col">
+
+    {% for step in steps %}
+    <div class="relative pl-4 mb-6 last:mb-0">
+
+      {# Centered vertical connector line behind the icon #}
+      {% if not loop.last %}
+      <div class="absolute top-7 left-9 w-0.5 h-full
+            {% if loop.index < current_step|int %}
+              bg-[var(--primary)]
+            {% else %}
+              bg-gray-300
+            {% endif %}
+            transition-all duration-500 ease-in-out">
+      </div>
+      {% endif %}
+
+      <div class="flex items-start gap-4">
+        {# Step circle #}
+        <div class="z-10 w-10 h-10 border border-opacity-60 border-gray-500 flex items-center justify-center rounded-lg
+                    {% if loop.index == current_step|int %}
+                      bg-[var(--primary)] text-white font-semibold border-2 border-black
+                    {% elif loop.index < current_step|int %}
+                      bg-blue-100 text-gray-600 font-medium
+                    {% else %}
+                      bg-gray-200 text-gray-600
+                    {% endif %}
+                    transition-colors duration-300">
+
+          {% if step.icon %}
+          <div class="w-4 h-4 text-current">
+            {{ step.icon | safe }}
+          </div>
+          {% else %}
+          <span class="text-sm">{{ loop.index }}</span>
+          {% endif %}
+        </div>
+
+        {# Step label #}
+        <div class="flex-1">
+          <p class="text-sm break-words min-h-[1.25rem] transition-colors duration-300
+                {% if loop.index == current_step|int %}
+                  text-[var(--foreground)] font-bold
+                {% else %}
+                  text-[var(--muted-foreground)]
+                {% endif %}">
+            {{ _(step.title) }}
+          </p>
+
+          <p
+            class="text-xs text-[var(--muted-foreground)] leading-tight break-words min-h-[2rem] max-h-[2.5rem] overflow-hidden">
+            {{ _(step.description) }}
+          </p>
+
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>

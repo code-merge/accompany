@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="bg-[var(--muted-foreground)]/20 min-h-screen flex justify-center items-center">
+
+  <!-- temp theme toggle keep till development is complete-->
+
+  <button @click="dark = !dark; localStorage.theme = dark ? 'dark' : 'light'" class="btn-ghost absolute top-4 right-4">
+    Toggle Dark
+  </button>
+
+  <!-- Content Card -->
+  <div
+    class="min-h-[580px] md:min-h-[640px] lg:min-h-[680px] h-auto max-w-6xl w-full flex flex-col overflow-hidden p-8 gap-y-4 bg-[var(--card)] shadow-lg rounded-xl border border-[var(--border)]">
+
+    <div id="onboarding-shell" class="flex-1">
+      {% if content_template %}
+      {% include content_template %}
+      {% else %}
+      {% block onboarding_shell_content %}{% endblock %}
+      {% endif %}
+    </div>
+
+    <div class="flex-shrink-0">
+      {% include "components/footer.html" %}
+    </div>
+
+
+  </div>
+
+</div>
+{% endblock %}

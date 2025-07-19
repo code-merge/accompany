@@ -4,6 +4,8 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.core.config.config import settings
 from app.core.utils.lifespan import app_lifespan
 from app.core.utils.static_mounts import mount_static_dirs
+from app.modules.onboarding.routers import onboarding_router
+
 
 def get_app() -> FastAPI:
     """
@@ -33,6 +35,7 @@ def get_app() -> FastAPI:
 
     app.add_middleware(SessionMiddleware, secret_key="<YOUR SECRET KEY>")
 
+    app.include_router(onboarding_router, prefix="/onboarding", tags=["onboarding"])
 
     return app
 
