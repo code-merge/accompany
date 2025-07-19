@@ -68,3 +68,11 @@ msgstr "Finish Setup"
 
 msgid "onboarding_welcome_msg"
 msgstr "Welcome to the Accompany ERP installation wizard! Get ready to transform your business operations. This easy-to-follow guide will help you set up Accompany efficiently, so you can start enjoying increased productivity, better data management, and informed decision-making."
+
+# Licence Page
+
+msgid "onboarding_licence_title"
+msgstr "Licence Agreement"
+
+msgid "onboarding_licence_accept"
+msgstr "I have read and accept the license terms"

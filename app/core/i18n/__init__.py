@@ -13,5 +13,4 @@ def compile_all_translations():
     for module in settings.ENABLED_MODULES:
         i18n_path = settings.MODULES_DIR / module / "i18n"
         if i18n_path.exists():
-            print(i18n_path)
             compile_translations(i18n_path)

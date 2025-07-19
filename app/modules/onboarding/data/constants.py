@@ -5,4 +5,5 @@ ICON_DIR = Path("app/modules/onboarding/static/images")
 
 steps = [
     {"icon": load_svg(ICON_DIR / "handshake.svg"), "title": "onboarding_welcome", "description": "onboarding_welcome_desc"},
+    {"icon": load_svg(ICON_DIR / "copyright.svg"), "title": "onboarding_licence", "description": "onboarding_licence_desc"},
 ]
