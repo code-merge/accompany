@@ -10,7 +10,7 @@ def compile_tailwind():
     config = os.path.join(setup_dir, "tailwind.config.js")
 
     if not os.path.exists(tailwind_bin):
-        sys.exit("❌ Tailwind CLI binary not found in Setup/. Please add it.")
+        sys.exit("Tailwind CLI binary not found in Setup/. Please add it.")
 
     return subprocess.Popen([
         tailwind_bin,
