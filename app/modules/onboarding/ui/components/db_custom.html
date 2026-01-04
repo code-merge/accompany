@@ -134,7 +134,7 @@
           <input id="ssl" name="ssl" type="checkbox"
             class="w-5 h-5 transition checked:bg-[var(--accent)] focus:ring-2 focus:ring-[var(--ring)]"
             x-model="form.ssl" @change="errors.ssl_cert = null" />
-          {{ _(db_ssl_checkbox) }}
+          {{ _('db_ssl_checkbox') }}
         </label>
 
         <template x-if="form.ssl">
