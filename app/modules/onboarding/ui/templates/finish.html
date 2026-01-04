@@ -1,0 +1,109 @@
+{% from "button.html" import button %}
+{% from "progress.html" import progress %}
+
+<div class="flex w-full h-full p-2 gap-x-4">
+
+  <!-- Sidebar -->
+  <div class="w-1/4 border-[var(--border)]">
+    {% include "components/sidebar.html" %}
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-3/4">
+    <div class="h-full flex flex-col items-center gap-y-6 w-full">
+
+      <h2 class="text-xl font-bold">{{ _("onboarding_finish_title") }}</h2>
+
+      <div class="w-full h-full px-8 py-4 border border-[var(--border)] rounded-md">
+
+        <div x-data='{
+          summary: {{ (summary or {}) | tojson }},
+          started: false,
+          progress: 0,
+          currentText: "",
+          src: null,
+
+          startSetup() {
+            if (this.started) return;
+            this.started = true;
+            this.currentText = "🔧 Starting provisioning…";
+            let step = 0, total = 6;
+
+            this.src = new EventSource("/onboarding/finish-stream");
+
+            this.src.addEventListener("log", e => {
+              this.currentText = e.data;
+              this.progress = Math.min(100, Math.round(++step / total * 100));
+            });
+
+            this.src.addEventListener("done", () => {
+              this.src.close();
+              this.currentText = "✔️ Provisioning complete. Redirecting…";
+              setTimeout(() => window.location.replace("/login"), 800);
+            });
+
+            this.src.onerror = () => {
+              if (this.src) {
+                this.src.close();
+                this.currentText = "⚠️ Stream disconnected unexpectedly.";
+              }
+            };
+          }
+        }' class="h-full flex flex-col justify-between">
+
+          <!-- Review Summary -->
+          <div x-show="!started" class="space-y-6">
+            <h2 class="text-lg font-bold">{{ _("onboarding_review_text") }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div><span class="font-semibold">Database Setup:</span> <span x-text="summary.db_type"></span></div>
+              <div><span class="font-semibold">Database Name:</span> <span x-text="summary.db_name"></span></div>
+              <div><span class="font-semibold">Admin Email:</span> <span x-text="summary.admin_email"></span></div>
+              <div><span class="font-semibold">Company:</span> <span x-text="summary.company_name"></span></div>
+              <div><span class="font-semibold">Industry:</span> <span x-text="summary.industry"></span></div>
+              <div><span class="font-semibold">Country:</span> <span x-text="summary.country"></span></div>
+              <div><span class="font-semibold">Language:</span> <span x-text="summary.language"></span></div>
+              <div class="md:col-span-2">
+                <span class="font-semibold">Modules:</span>
+                <span x-text="summary.modules?.join(', ') || ''"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progress + Status -->
+          <div x-show="started" class="space-y-4 w-full pt-4">
+            {{ progress(value="progress") }}
+            <div class="text-center text-sm" x-text="currentText"></div>
+          </div>
+
+          <!-- Navigation buttons -->
+          <div class="flex justify-evenly w-full mt-8">
+            {{ button(
+            label="onboarding_back_btn",
+            variant="outline",
+            size="xlg",
+            attrs={
+            "hx-get": "/onboarding/system-setup",
+            "hx-target": "#onboarding-shell",
+            "hx-swap": "innerHTML",
+            "hx-push-url": "true"
+            }
+            ) }}
+
+            {{ button(
+            label="onboarding_finish_btn",
+            variant="primary",
+            size="xlg",
+            disabled_class="cursor-not-allowed",
+            attrs={
+            ":disabled": "started",
+            "@click": "startSetup()",
+            ":class": "started ? 'cursor-not-allowed bg-gray-400 text-white' : 'bg-[var(--primary)] text-white'"
+            }
+            ) }}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

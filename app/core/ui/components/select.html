@@ -1,0 +1,42 @@
+{% macro select(
+name,
+label = "",
+options = [],
+value = "",
+error = "",
+required = false,
+extra_classes= "",
+attrs = {}
+) %}
+<div>
+    {% if label %}
+    <label for="{{ name }}" class="block text-sm font-medium mb-1">
+        {{ _(label) }}{% if required %}<span class="text-red-600">*</span>{% endif %}
+    </label>
+    {% endif %}
+    <select id="{{ name }}" name="{{ name }}"
+        class="flex h-10 w-full rounded-md border border-[var(--input)] bg-[var(--background)] px-3 py-2 text-sm ring-offset-background placeholder:text-[var(--muted-foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 ease-in-out {{ extra_classes }}"
+        {% if required %} required {% endif %} {{ attrs|xmlattr }}>
+        <option value="">{{ _('Select...') }}</option>
+        {% for opt in options %}
+        {% if opt is mapping %}
+        <option value="{{ opt.value }}" {% if opt.value==value %}selected{% endif %}>
+            {{ _(opt.label) }}
+        </option>
+        {% else %}
+        <option value="{{ opt }}" {% if opt==value %}selected{% endif %}>
+            {{ _(opt) }}
+        </option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    {% if error %}
+    <div class="text-xs text-red-600 mt-1">{{ _(error) }}</div>
+    {% else %}
+    <div x-show="errors['{{ name }}']" class="text-xs text-red-600 mt-1">
+        <span x-text="errors['{{ name }}']"></span>
+    </div>
+    {% endif %}
+
+</div>
+{% endmacro %}

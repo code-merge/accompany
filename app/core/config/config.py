@@ -36,6 +36,11 @@ class Settings(BaseSettings):
     DATA_DIR: Path = APP_DIR / "data"
 
     ENABLED_MODULES: list[str] = ["onboarding"]  # Add the modules you want to enable for static files. here
+    
+    POSTGRES_SUPERUSER: str = "postgres"
+    POSTGRES_PASSWORD: str = "postgres"
+    POSTGRES_HOST: str = "127.0.0.1"
+    POSTGRES_PORT: int = 5432
 
     @property
     def STATIC_DIRS(self) -> list[Path]:

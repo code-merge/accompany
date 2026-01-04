@@ -1,0 +1,82 @@
+{% from "button.html" import button %}
+{% from "input.html" import input %}
+
+<div class="flex w-full h-full p-2 gap-x-4" x-data='{
+  accepted: {{ "true" if accepted else "false" }},
+  errors: {{ (errors or {}) | tojson }}
+}'>
+
+    <!-- Sidebar -->
+    <div class="w-1/4 border-[var(--border)]">
+        {% include "components/sidebar.html" %}
+    </div>
+
+    <!-- Main Content -->
+    <div class="w-3/4">
+        <div class="min-h-full flex flex-col items-center justify-between gap-y-2">
+            <h2 class="text-xl font-bold">{{ _("onboarding_licence_title") }}</h2>
+
+            <div
+                class="bg-[var(--muted)] h-96 overflow-y-auto border border-[var(--border)] rounded-md p-4 hide-scrollbar">
+                <pre
+                    class="text-sm font-mono text-center whitespace-pre-wrap text-[var(--secondary-foreground)]">{{ license_text }}</pre>
+            </div>
+
+
+            <!-- Checkbox with HTMX trigger -->
+            <div class="flex w-full justify-center items-center gap-3">
+                {{ input(
+                name="accept",
+                label="",
+                type="checkbox",
+                value=accepted,
+                extra_classes="w-6 h-6 !mb-0 transition-all duration-200 ease-in-out checked:bg-[var(--accent)]
+                checked:border-[var(--accent)] focus:ring-2 focus:ring-[var(--ring)]",
+                attrs={
+                "x-model": "accepted",
+                "@change": "htmx.ajax('GET', '/onboarding/licence?accept=' + accepted, {target: '#onboarding-shell',
+                swap: 'innerHTML', pushURL: true})"
+                }
+                ) }}
+
+                <label for="accept" class="text-sm font-medium">
+                    {{ _('onboarding_licence_accept') }}
+                </label>
+            </div>
+
+
+            <!-- Navigation buttons -->
+            <div class="flex justify-evenly w-full">
+
+                {{ button(
+                label="onboarding_back_btn",
+                variant="outline",
+                size="xlg",
+                attrs={
+                "hx-get": "/onboarding/",
+                "hx-target": "#onboarding-shell",
+                "hx-swap": "innerHTML",
+                "hx-push-url": "true"
+                }
+                ) }}
+
+                {{ button(
+                label="onboarding_next_btn",
+                variant="primary",
+                size="xlg",
+                disabled_class="cursor-not-allowed",
+                attrs={
+                ":disabled": "!accepted",
+                ":class": "!accepted ? 'cursor-not-allowed bg-gray-400 text-white' : 'bg-[var(--primary)] text-white'",
+                "hx-get": "/onboarding/db-setup",
+                "hx-target": "#onboarding-shell",
+                "hx-swap": "innerHTML",
+                "hx-push-url": "true"
+                }
+                ) }}
+
+            </div>
+        </div>
+    </div>
+
+</div>

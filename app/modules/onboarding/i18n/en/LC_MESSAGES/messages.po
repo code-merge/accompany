@@ -1,0 +1,249 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Onboarding 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: en\n"
+
+# Sidebar
+
+msgid "onboarding_welcome"
+msgstr "Welcome"
+
+msgid "onboarding_licence"
+msgstr "Licence"
+
+msgid "onboarding_language_theme"
+msgstr "Language & Theme"
+
+msgid "onboarding_database_setup"
+msgstr "Database Setup"
+
+msgid "onboarding_admin_user_setup"
+msgstr "Admin User Setup"
+
+msgid "onboarding_company_setup"
+msgstr "Company Setup"
+
+msgid "onboarding_system_setup"
+msgstr "System Setup"
+
+msgid "onboarding_finish"
+msgstr "Finish"
+
+msgid "onboarding_welcome_desc"
+msgstr "Welcome to the syetem setup"
+
+msgid "onboarding_licence_desc"
+msgstr "Licence Agreement"
+
+msgid "onboarding_language_theme_desc"
+msgstr "Choose your preferred language"
+
+msgid "onboarding_database_setup_desc"
+msgstr "Configure your database"
+
+msgid "onboarding_admin_user_setup_desc"
+msgstr "Create your admin user"
+
+msgid "onboarding_company_setup_desc"
+msgstr "Set up company details"
+
+msgid "onboarding_system_setup_desc"
+msgstr "Setup your system"
+
+msgid "onboarding_finish_desc"
+msgstr "You're ready to roll!"
+
+# Action buttons
+msgid "onboarding_next_btn"
+msgstr "Next"
+
+msgid "onboarding_back_btn"
+msgstr "Back"
+
+msgid "onboarding_finish_btn"
+msgstr "Finish Setup"
+
+# Welcome Page
+
+msgid "onboarding_welcome_msg"
+msgstr "Welcome to the Accompany ERP installation wizard! Get ready to transform your business operations. This easy-to-follow guide will help you set up Accompany efficiently, so you can start enjoying increased productivity, better data management, and informed decision-making."
+
+# Licence Page
+
+msgid "onboarding_licence_title"
+msgstr "Licence Agreement"
+
+msgid "onboarding_licence_accept"
+msgstr "I have read and accept the license terms"
+
+# Database Setup
+
+msgid "onboarding_dbsetup_title"
+msgstr "Database Setup"
+
+msgid "onboarding_dbsetup_desc"
+msgstr "Setup the database for Accompany to work. You can either create a database or connect to an existing database"
+
+msgid "onboarding_db_type_std"
+msgstr "Standard"
+
+msgid "onboarding_db_type_custom"
+msgstr "Custom"
+
+msgid "db_name_input"
+msgstr "Database Name"
+
+msgid "db_host_input"
+msgstr "Host"
+
+msgid "db_port_input"
+msgstr "Port"
+
+msgid "db_user_input"
+msgstr "Database User"
+
+msgid "db_password_input"
+msgstr "Password"
+
+msgid "db_ssl_checkbox"
+msgstr "Use SSL"
+
+msgid "db_name_ip_error"
+msgstr "Database name is required"
+
+msgid "host_ip_error"
+msgstr "Host is required"
+
+msgid "port_ip_error"
+msgstr "Valid port is required"
+
+msgid "user_ip_error"
+msgstr "User is required"
+
+msgid "password_ip_error"
+msgstr "Password is required"
+
+msgid "ssl_cert_ip_error"
+msgstr "SSL certificate is required"
+
+msgid "ssl_cert_type_error"
+msgstr "Only .pem certificate files are allowed"
+
+# Admin User Setup
+
+msgid "onboarding_usersetup_title"
+msgstr "Admin User Setup"
+
+msgid "onboarding_usersetup_desc"
+msgstr "Setup the admin user for Accompany."
+
+msgid "admin_setup_name_input"
+msgstr "Full Name"
+
+msgid "admin_setup_email_input"
+msgstr "Email"
+
+msgid "admin_setup_password_input"
+msgstr "Password"
+
+msgid "admin_setup_con_password_input"
+msgstr "Confirm Password"
+
+msgid "admin_setup_prof_pic_input"
+msgstr "Profile Picture (Optional)"
+
+msgid "admin_full_name_error"
+msgstr "Full name is required"
+
+msgid "admin_email_required_error"
+msgstr "Email is required"
+
+msgid "admin_email_invalid_error"
+msgstr "Enter a valid email address"
+
+msgid "admin_password_length_error"
+msgstr "Password must be at least 8 characters"
+
+msgid "admin_password_match_error"
+msgstr "Passwords do not match"
+
+msgid "admin_profile_picture_type_error"
+msgstr "Allowed: .jpg .jpeg .png .gif"
+
+# Company Setup
+msgid "onboarding_companysetup_title"
+msgstr "Company Setup"
+
+msgid "onboarding_companysetup_desc"
+msgstr "Setup the organizational details."
+
+msgid "company_name_input"
+msgstr "Company Name"
+
+msgid "company_industry_input"
+msgstr "Industry"
+
+msgid "company_logo_input"
+msgstr "Company Logo (optional)"
+
+msgid "company_name_required_error"
+msgstr "Company name is required"
+
+msgid "industry_required_error"
+msgstr "Industry is required"
+
+msgid "company_logo_type_error"
+msgstr "Allowed: .jpg .jpeg .png .gif .svg"
+
+# System Setup
+
+msgid "onboarding_systemsetup_title"
+msgstr "System Setup"
+
+msgid "onboarding_systemsetup_desc"
+msgstr "Setup the system to your needs."
+
+msgid "system_country_input"
+msgstr "Country"
+
+msgid "system_currency_input"
+msgstr "Currency"
+
+msgid "system_timezone_input"
+msgstr "Timezone"
+
+msgid "system_language_input"
+msgstr "System Language"
+
+msgid "system_theme_input"
+msgstr "System Theme"
+
+msgid "system_modules_input"
+msgstr "Starter Modules"
+
+msgid "system_modules_select"
+msgstr "Select modules…"
+
+msgid "system_country_required_error"
+msgstr "Country is required"
+
+msgid "system_currency_required_error"
+msgstr "Currency is required"
+
+msgid "system_timezone_required_error"
+msgstr "Timezone is required"
+
+msgid "system_language_required_error"
+msgstr "Language is required"
+
+msgid "system_theme_required_error"
+msgstr "Theme is required"
+
+# Finish Setup
+
+msgid "onboarding_finish_title"
+msgstr "Finishing Up...."
+
+msgid "onboarding_review_text"
+msgstr "Review & Confirm"

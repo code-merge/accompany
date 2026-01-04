@@ -1,0 +1,64 @@
+{# app/core/ui/components/input.html #}
+{% from "icon.html" import icon as render_icon %}
+
+{% macro input(
+name,
+label = "",
+type = "text",
+value = "",
+placeholder = "",
+icon_name = "",
+icon_path = None,
+help_text = "",
+error = "",
+disabled = false,
+required = false,
+extra_classes= "",
+attrs = {}
+) %}
+{% set base = "flex h-10 w-full rounded-md border border-[var(--input)] bg-[var(--background)] px-3 py-2 text-sm
+ring-offset-background placeholder:text-[var(--muted-foreground)] focus-visible:outline-none focus-visible:ring-2
+focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50
+transition-all duration-200 ease-in-out" %}
+{% set lbl = "block text-sm font-medium leading-none mb-2 text-[var(--foreground)] transition-colors duration-150
+ease-in-out group-focus-within:text-[var(--primary)]" %}
+{% set errc = "text-xs text-[var(--destructive)] mt-1 min-h-[1rem]" %}
+{% set helpc = "text-xs text-[var(--muted-foreground)] mt-1" %}
+
+
+<div>
+  {% if label %}
+  <label for="{{ name }}" class="{{ lbl }}">
+    {{ _(label) }}{% if required %}<span class="text-red-600">*</span>{% endif %}
+  </label>
+  {% endif %}
+
+  <div class="relative group">
+    {% if icon_name %}
+    <div class="absolute left-2 top-2 pointer-events-none">
+      {{ render_icon(name=icon_name, path=icon_path, size="1rem") }}
+    </div>
+    {% set base = base ~ " pl-8" %}
+    {% endif %}
+
+    <input type="{{ type }}" id="{{ name }}" name="{{ name }}" value="{{ value }}" placeholder="{{ placeholder }}"
+      class="{{ base }} {{ extra_classes }}" {% if required %} required {% endif %} {% if disabled %} disabled {% endif
+      %} {{ attrs|xmlattr }} />
+  </div>
+
+  {# server‐error override #}
+  {% if error %}
+  <div class="{{ errc }}">{{ _(error) }}</div>
+
+  {# help text override #}
+  {% elif help_text %}
+  <div class="{{ helpc }}">{{ _(help_text) }}</div>
+
+  {# Alpine‐driven errors #}
+  {% else %}
+  <div x-show="errors['{{ name }}']" class="{{ errc }}">
+    <span x-text="errors['{{ name }}']"></span>
+  </div>
+  {% endif %}
+</div>
+{% endmacro %}

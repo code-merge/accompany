@@ -1,0 +1,57 @@
+{% from "input.html" import input %}
+{% from "button.html" import button %}
+
+{% set db_name_ip_error = _("db_name_ip_error") %}
+
+<div x-data="{
+  form: { db_name: '{{ form.db_name|default('') }}' },
+  errors: {{ errors | tojson }},
+  errorMessages: {
+    db_name_required: '{{ db_name_ip_error }}'
+  },
+   submitForm() {
+    this.errors.db_name = this.form.db_name.trim() ? null : this.errorMessages.db_name_required;
+    if (!this.errors.db_name) $refs.dbForm.submit();
+  }
+}" class="h-full flex flex-col justify-between">
+
+  <!-- Form (input only) -->
+  <form method="post" action="{{ request.url_for('dbsetup_standard') }}" x-ref="dbForm">
+    {{ input(
+    name = "db_name",
+    label = "db_name_input",
+    placeholder = "accompany_db",
+    required = true,
+    value = form.db_name,
+    error = errors.db_name,
+    attrs = {
+    'x-model': 'form.db_name',
+    'x-on:blur': "errors.db_name = form.db_name.trim() ? null : errorMessages['db_name_required']"
+    }
+    ) }}
+  </form>
+
+  <!-- Navigation Buttons outside form -->
+  <div class="flex justify-evenly w-full mt-6">
+    {{ button(
+    label="onboarding_back_btn",
+    variant="outline",
+    size="xlg",
+    attrs={
+    "hx-get": "/onboarding/licence",
+    "hx-target": "#onboarding-shell",
+    "hx-swap": "innerHTML",
+    "hx-push-url": "true"
+    }
+    ) }}
+
+    {{ button(
+    label="onboarding_next_btn",
+    variant="primary",
+    size="xlg",
+    attrs={
+    "@click": "submitForm()"
+    }
+    ) }}
+  </div>
+</div>

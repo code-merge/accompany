@@ -1,6 +1,10 @@
 ## Setup Instructions.
 
 - Download the `tailwindcss CLI` binary accoring to your platform and place it in the `setup` directory.
+- Give the executable permissions (onl applies to unix based os) with
+    ```sh
+    chmod +x <filename>
+    ```
 - Then run the app to compile the css for development.
 
 ### References:

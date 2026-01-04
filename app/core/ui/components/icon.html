@@ -1,0 +1,7 @@
+{% macro icon(name, size="1rem", stroke="2", extra_classes="", path=None) %}
+<svg class="lucide {{ extra_classes }}" width="{{ size }}" height="{{ size }}" stroke-width="{{ stroke }}"
+  stroke="currentColor" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  {% set icon_path = path or "core/ui/icons/" ~ name ~ ".svg" %}
+  {% include icon_path %}
+</svg>
+{% endmacro %}
