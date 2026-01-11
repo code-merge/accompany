@@ -35,10 +35,10 @@ class Settings(BaseSettings):
     MODULES_DIR: Path = APP_DIR / "modules"
     DATA_DIR: Path = APP_DIR / "data"
 
-    ENABLED_MODULES: list[str] = ["onboarding"]  # Add the modules you want to enable for static files. here
-    
+    ENABLED_MODULES: list[str] = ["base", "onboarding"]  # Add the modules you want to enable for static files. here
+
     POSTGRES_SUPERUSER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres"
+    POSTGRES_PASSWORD: str = "chinmay12"
     POSTGRES_HOST: str = "127.0.0.1"
     POSTGRES_PORT: int = 5432
 

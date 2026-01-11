@@ -1,0 +1,16 @@
+{% extends "core/templates/base.html" %}
+
+{% block content %}
+
+<div class="min-w-full flex flex-col items-center justify-center">
+    Home Page.
+
+    <form hx-post="/auth/logout" hx-target="body" hx-swap="outerHTML" class="inline">
+        <button type="submit" class="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            {{ _("logout_btn") }}
+        </button>
+    </form>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,248 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Onboarding 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr\n"
+
+# Sidebar
+
+msgid "onboarding_welcome"
+msgstr "Bienvenue"
+
+msgid "onboarding_licence"
+msgstr "Licence"
+
+msgid "onboarding_language_theme"
+msgstr "Langue et Thème"
+
+msgid "onboarding_database_setup"
+msgstr "Configuration de la Base de Données"
+
+msgid "onboarding_admin_user_setup"
+msgstr "Configuration de l'Administrateur"
+
+msgid "onboarding_company_setup"
+msgstr "Configuration de l'Entreprise"
+
+msgid "onboarding_system_setup"
+msgstr "Configuration du Système"
+
+msgid "onboarding_finish"
+msgstr "Terminer"
+
+msgid "onboarding_welcome_desc"
+msgstr "Bienvenue dans la configuration du système"
+
+msgid "onboarding_licence_desc"
+msgstr "Accord de Licence"
+
+msgid "onboarding_language_theme_desc"
+msgstr "Choisissez votre langue préférée"
+
+msgid "onboarding_database_setup_desc"
+msgstr "Configurez votre base de données"
+
+msgid "onboarding_admin_user_setup_desc"
+msgstr "Créez votre compte administrateur"
+
+msgid "onboarding_company_setup_desc"
+msgstr "Configurez les détails de votre entreprise"
+
+msgid "onboarding_system_setup_desc"
+msgstr "Configurez le système selon vos besoins"
+
+msgid "onboarding_finish_desc"
+msgstr "Vous êtes prêt à démarrer !"
+
+# Action buttons
+
+msgid "onboarding_next_btn"
+msgstr "Suivant"
+
+msgid "onboarding_back_btn"
+msgstr "Retour"
+
+# Welcome Page
+
+msgid "onboarding_welcome_msg"
+msgstr "Bienvenue dans l’assistant d’installation d’Accompany ERP ! Préparez-vous à transformer la gestion de votre entreprise. Ce guide facile à suivre vous aidera à configurer Accompany efficacement, afin que vous puissiez bénéficier d’une productivité accrue, d’une meilleure gestion des données et de décisions éclairées."
+
+# Licence Page
+
+msgid "onboarding_licence_title"
+msgstr "Accord de Licence"
+
+msgid "onboarding_licence_accept"
+msgstr "J’ai lu et j’accepte les conditions de licence"
+
+# Database Setup
+
+msgid "onboarding_dbsetup_title"
+msgstr "Configuration de la Base de Données"
+
+msgid "onboarding_dbsetup_desc"
+msgstr "Configurez la base de données pour que Accompany fonctionne. Vous pouvez créer une nouvelle base ou vous connecter à une base existante."
+
+msgid "onboarding_db_type_std"
+msgstr "Standard"
+
+msgid "onboarding_db_type_custom"
+msgstr "Personnalisé"
+
+msgid "db_name_input"
+msgstr "Nom de la Base de Données"
+
+msgid "db_host_input"
+msgstr "Hôte"
+
+msgid "db_port_input"
+msgstr "Port"
+
+msgid "db_user_input"
+msgstr "Utilisateur"
+
+msgid "db_password_input"
+msgstr "Mot de passe"
+
+msgid "db_ssl_checkbox"
+msgstr "Utiliser SSL"
+
+msgid "db_name_ip_error"
+msgstr "Le nom de la base de données est requis"
+
+msgid "host_ip_error"
+msgstr "L’hôte est requis"
+
+msgid "port_ip_error"
+msgstr "Un port valide est requis"
+
+msgid "user_ip_error"
+msgstr "L’utilisateur est requis"
+
+msgid "password_ip_error"
+msgstr "Le mot de passe est requis"
+
+msgid "ssl_cert_ip_error"
+msgstr "Le certificat SSL est requis"
+
+msgid "ssl_cert_type_error"
+msgstr "Seuls les fichiers de certificat .pem sont autorisés"
+
+# Admin User Setup
+
+msgid "onboarding_usersetup_title"
+msgstr "Configuration de l’Administrateur"
+
+msgid "onboarding_usersetup_desc"
+msgstr "Configurez le compte administrateur pour Accompany."
+
+msgid "admin_setup_name_input"
+msgstr "Nom complet"
+
+msgid "admin_setup_email_input"
+msgstr "Adresse e-mail"
+
+msgid "admin_setup_password_input"
+msgstr "Mot de passe"
+
+msgid "admin_setup_con_password_input"
+msgstr "Confirmer le mot de passe"
+
+msgid "admin_setup_prof_pic_input"
+msgstr "Photo de profil (facultatif)"
+
+msgid "admin_full_name_error"
+msgstr "Le nom complet est requis"
+
+msgid "admin_email_required_error"
+msgstr "L’adresse e-mail est requise"
+
+msgid "admin_email_invalid_error"
+msgstr "Entrez une adresse e-mail valide"
+
+msgid "admin_password_length_error"
+msgstr "Le mot de passe doit contenir au moins 8 caractères"
+
+msgid "admin_password_match_error"
+msgstr "Les mots de passe ne correspondent pas"
+
+msgid "admin_profile_picture_type_error"
+msgstr "Formats autorisés : .jpg .jpeg .png .gif"
+
+# Company Setup
+
+msgid "onboarding_companysetup_title"
+msgstr "Configuration de l’Entreprise"
+
+msgid "onboarding_companysetup_desc"
+msgstr "Configurez les informations organisationnelles"
+
+msgid "company_name_input"
+msgstr "Nom de l’Entreprise"
+
+msgid "company_industry_input"
+msgstr "Secteur d’activité"
+
+msgid "company_logo_input"
+msgstr "Logo de l’entreprise (facultatif)"
+
+msgid "company_name_required_error"
+msgstr "Le nom de l’entreprise est requis"
+
+msgid "industry_required_error"
+msgstr "Le secteur est requis"
+
+msgid "company_logo_type_error"
+msgstr "Formats autorisés : .jpg .jpeg .png .gif .svg"
+
+# System Setup
+
+msgid "onboarding_systemsetup_title"
+msgstr "Configuration du Système"
+
+msgid "onboarding_systemsetup_desc"
+msgstr "Configurez le système selon vos préférences"
+
+msgid "system_country_input"
+msgstr "Pays"
+
+msgid "system_currency_input"
+msgstr "Devise"
+
+msgid "system_timezone_input"
+msgstr "Fuseau horaire"
+
+msgid "system_language_input"
+msgstr "Langue du système"
+
+msgid "system_theme_input"
+msgstr "Thème du système"
+
+msgid "system_modules_input"
+msgstr "Modules de démarrage"
+
+msgid "system_modules_select"
+msgstr "Sélectionner des modules…"
+
+msgid "system_country_required_error"
+msgstr "Le pays est requis"
+
+msgid "system_currency_required_error"
+msgstr "La devise est requise"
+
+msgid "system_timezone_required_error"
+msgstr "Le fuseau horaire est requis"
+
+msgid "system_language_required_error"
+msgstr "La langue est requise"
+
+msgid "system_theme_required_error"
+msgstr "Le thème est requis"
+
+# Finish Setup
+
+msgid "onboarding_finish_title"
+msgstr "Finalisation..."
+
+msgid "onboarding_review_text"
+msgstr "Vérifier et Confirmer"

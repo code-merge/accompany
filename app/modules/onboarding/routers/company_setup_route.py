@@ -8,7 +8,7 @@ from app.core.session_manager import SessionManager
 from app.core.templating.template_utils import render
 from app.modules.onboarding.models.company_model import CompanyData
 from app.modules.onboarding.utils.context_utils import build_context
-from app.modules.onboarding.data.constants import INDUSTRIES
+from app.modules.onboarding.data.constants import LANGUAGES, THEMES, INDUSTRIES
 
 
 router = APIRouter()
@@ -43,6 +43,8 @@ async def company_setup(request: Request):
     ctx = build_context(request, current_step=5, extra={
         "form":      form,
         "errors":    errors,
+        "languages": LANGUAGES,
+        "themes":    THEMES,
         "industry_options": INDUSTRIES
     })
     return render("company_setup.html", request, ctx)
@@ -93,7 +95,8 @@ async def company_setup_post(
     if errors:
         return render("company_setup.html", request,
                       build_context(request, current_step=5,
-                                    extra={"form": form, "errors": errors}))
+                                    extra={"form": form, "errors": errors,
+                                           "languages": LANGUAGES, "themes": THEMES}))
 
     sm.clear_errors("company")
     return RedirectResponse(request.url_for("system-setup"), status_code=302)

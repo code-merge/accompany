@@ -1,21 +1,21 @@
-{% from "input.html" import input %}
-{% from "button.html" import button %}
-{% from "select.html" import select %}
+{% from "core/components/button.html" import button %}
+{% from "core/components/input.html" import input %}
+{% from "core/components/select.html" import select %}
 
 <div class="flex w-full h-full p-2 gap-x-4">
 
     <!-- Sidebar -->
     <div class="w-1/4 border-[var(--border)]">
-        {% include "components/sidebar.html" %}
+        {% include "modules/onboarding/ui/components/sidebar.html" %}
     </div>
 
     <!-- Main Content -->
     <div class="w-3/4">
         <div class="h-full flex flex-col items-center gap-y-6 w-full">
 
-      <h2 class="text-xl font-bold">{{ _("onboarding_systemsetup_title") }}</h2>
+            <h2 class="text-xl font-bold">{{ _("onboarding_systemsetup_title") }}</h2>
 
-      <p class="font-sans text-sm">{{ _("onboarding_systemsetup_desc") }}</p>
+            <p class="font-sans text-sm">{{ _("onboarding_systemsetup_desc") }}</p>
 
             <div class="w-full h-full px-8 py-4 border border-[var(--border)] rounded-md">
 
@@ -73,14 +73,16 @@
                             'x-on:blur': "errors.country_code = form.country_code ? null : errorMessages.country_code"
                             }) }}
 
-                            {{ select("currency", "system_currency_input", required=true, value=form.currency, error=errors.currency,
+                            {{ select("currency", "system_currency_input", required=true, value=form.currency,
+                            error=errors.currency,
                             options=currencies, attrs={
                             'x-model': 'form.currency',
                             'readonly': 'true',
                             'x-on:blur': "errors.currency = form.currency ? null : errorMessages.currency"
                             }) }}
 
-                            {{ select("timezone", "system_timezone_input", required=true, value=form.timezone, error=errors.timezone,
+                            {{ select("timezone", "system_timezone_input", required=true, value=form.timezone,
+                            error=errors.timezone,
                             options=timezones, attrs={
                             'x-model': 'form.timezone',
                             'readonly': 'true',
@@ -93,7 +95,8 @@
                             'x-on:blur': "errors.language = form.language ? null : errorMessages.language"
                             }) }}
 
-                            {{ select("theme", "system_theme_input", required=true, value=form.theme, error=errors.theme,
+                            {{ select("theme", "system_theme_input", required=true, value=form.theme,
+                            error=errors.theme,
                             options=themes, attrs={
                             'x-model': 'form.theme',
                             'x-on:blur': "errors.theme = form.theme ? null : errorMessages.theme"

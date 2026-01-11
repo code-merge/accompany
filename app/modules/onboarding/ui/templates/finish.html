@@ -1,11 +1,11 @@
-{% from "button.html" import button %}
-{% from "progress.html" import progress %}
+{% from "core/components/button.html" import button %}
+{% from "core/components/progress.html" import progress %}
 
 <div class="flex w-full h-full p-2 gap-x-4">
 
   <!-- Sidebar -->
   <div class="w-1/4 border-[var(--border)]">
-    {% include "components/sidebar.html" %}
+    {% include "modules/onboarding/ui/components/sidebar.html" %}
   </div>
 
   <!-- Main Content -->
@@ -39,7 +39,7 @@
             this.src.addEventListener("done", () => {
               this.src.close();
               this.currentText = "✔️ Provisioning complete. Redirecting…";
-              setTimeout(() => window.location.replace("/login"), 800);
+              setTimeout(() => window.location.replace("/auth/login"), 800);
             });
 
             this.src.onerror = () => {

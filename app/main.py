@@ -4,7 +4,11 @@ from starlette.middleware.sessions import SessionMiddleware
 from app.core.config.config import settings
 from app.core.utils.lifespan import app_lifespan
 from app.core.utils.static_mounts import mount_static_dirs
+from app.core.middlewares.auth_guard import AuthGuardMiddleware
+
+from app.router import router as home_router
 from app.modules.onboarding.routers import onboarding_router
+from app.modules.base.auth.router import router as auth_router
 
 
 def get_app() -> FastAPI:
@@ -33,9 +37,15 @@ def get_app() -> FastAPI:
 
     mount_static_dirs(app)
 
-    app.add_middleware(SessionMiddleware, secret_key="<YOUR SECRET KEY>")
+    app.add_middleware(SessionMiddleware, secret_key="accompany")
+    app.add_middleware(AuthGuardMiddleware)
 
     app.include_router(onboarding_router, prefix="/onboarding", tags=["onboarding"])
+    
+    app.include_router(auth_router, prefix="/auth", tags=["auth"])
+    
+    app.include_router(home_router)
+
 
     return app
 

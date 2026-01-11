@@ -18,3 +18,4 @@ INDUSTRIES = ["Educational", "Manufacturing", "Technology", "Healthcare", "Retai
 
 LANGUAGES   = ["English", "Spanish", "French", "German", "Chinese", "Japanese"]
 THEMES      = ["Light", "Dark"]
+

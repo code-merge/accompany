@@ -3,15 +3,13 @@ import string
 import secrets
 import asyncpg
 from pathlib import Path
-from passlib.hash import bcrypt
 from urllib.parse import quote_plus
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy import create_engine, text
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncEngine
 
+from app.core.db.models.base import Base
 from app.core.config.config import settings
 from app.core.services.credentials import write_db_creds
-from app.modules.onboarding.data.constants import LANGUAGES
 
 def generate_password(length: int = 20) -> str:
     """
@@ -191,140 +189,10 @@ def get_db_admin_engine(creds: dict) -> AsyncEngine:
     url = f"postgresql+asyncpg://{user}:{pw}@{host}:{port}/{db}"
     return create_async_engine(url, future=True, echo=False)
 
-async def create_system_admin_user(engine: AsyncEngine, email: str, password: str) -> tuple[bool, str]:
-    """
-    Asynchronously creates a system admin user in the database.
-
-    This function ensures the 'users' table exists, hashes the provided password,
-    and inserts a new user with the 'system_admin' role. If the email already exists,
-    it returns an appropriate error message.
-
-    Args:
-        engine (AsyncEngine): The SQLAlchemy asynchronous engine for database connection.
-        email (str): The email address (used as username) for the new admin user.
-        password (str): The plaintext password for the new admin user.
-
-    Returns:
-        tuple[bool, str]: A tuple where the first element indicates success (True) or failure (False),
-                          and the second element is a message describing the result.
-    """
+async def initialize_schema(engine: AsyncEngine) -> str:
     try:
         async with engine.begin() as conn:
-            await conn.execute(text("""
-                CREATE TABLE IF NOT EXISTS users (
-                    id SERIAL PRIMARY KEY,
-                    username TEXT UNIQUE,
-                    hashed_password TEXT,
-                    role TEXT DEFAULT 'user'
-                );
-            """))
-            hashed_pw = bcrypt.using(rounds=12).hash(password)
-            await conn.execute(text("""
-                INSERT INTO users (username, hashed_password, role)
-                VALUES (:email, :pw, 'system_admin');
-            """), {"email": email, "pw": hashed_pw})
-        return True, "✅ System admin user created"
-    except IntegrityError:
-        return False, f"❌ Email '{email}' already exists"
+            await conn.run_sync(Base.metadata.create_all)
+        return "📦 Schema initialized"
     except Exception as e:
-        return False, f"❌ Failed to create admin: {e}"
-
-async def create_company_record(engine: AsyncEngine, name: str, industry: str) -> tuple[bool, str]:
-    """
-    Asynchronously creates a company record in the database.
-
-    If the 'company' table does not exist, it will be created. Then, a new record with the provided
-    company name and industry is inserted.
-
-    Args:
-        engine (AsyncEngine): The SQLAlchemy asynchronous engine to use for database operations.
-        name (str): The name of the company to be added.
-        industry (str): The industry of the company.
-
-    Returns:
-        tuple[bool, str]: A tuple where the first element indicates success (True) or failure (False),
-                          and the second element is a message describing the result.
-    """
-    try:
-        async with engine.begin() as conn:
-            await conn.execute(text("""
-                CREATE TABLE IF NOT EXISTS company (
-                    id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    industry TEXT NOT NULL
-                );
-            """))
-            await conn.execute(text("""
-                INSERT INTO company (name, industry)
-                VALUES (:name, :industry);
-            """), {"name": name, "industry": industry})
-        return True, "✅ Company record created"
-    except Exception as e:
-        return False, f"❌ Failed to create company: {e}"
-
-async def seed_languages(engine: AsyncEngine) -> str:
-    """
-    Seeds the 'languages' table in the database with language codes and their labels.
-
-    This function creates the 'languages' table if it does not exist, and inserts language codes
-    from the global LANGUAGES list, using the code as the label in uppercase. Duplicate codes are ignored.
-
-    Args:
-        engine (AsyncEngine): The SQLAlchemy asynchronous engine to use for database operations.
-
-    Returns:
-        str: A message indicating whether the seeding was successful or failed.
-    """
-    try:
-        async with engine.begin() as conn:
-            await conn.execute(text("""
-                CREATE TABLE IF NOT EXISTS languages (
-                    id SERIAL PRIMARY KEY,
-                    code TEXT UNIQUE,
-                    label TEXT
-                );
-            """))
-            for code in LANGUAGES:
-                label = code.upper()
-                await conn.execute(text("""
-                    INSERT INTO languages (code, label)
-                    VALUES (:code, :label)
-                    ON CONFLICT (code) DO NOTHING;
-                """), {"code": code, "label": label})
-        return "✔️ Languages seeded"
-    except Exception as e:
-        return f"❌ Failed to seed languages: {e}"
-
-async def seed_modules(engine: AsyncEngine, modules: list[str]) -> str:
-    """
-    Seeds the 'modules' table in the database with the provided list of module names.
-
-    If the 'modules' table does not exist, it will be created with columns for id, name, and enabled status.
-    Each module name in the provided list will be inserted into the table with 'enabled' set to TRUE.
-    If a module name already exists, it will not be inserted again.
-
-    Args:
-        engine (AsyncEngine): The asynchronous SQLAlchemy engine to use for database operations.
-        modules (list[str]): A list of module names to seed into the database.
-
-    Returns:
-        str: A message indicating whether the seeding was successful or failed, including error details if any.
-    """
-    try:
-        async with engine.begin() as conn:
-            await conn.execute(text("""
-                CREATE TABLE IF NOT EXISTS modules (
-                    id SERIAL PRIMARY KEY,
-                    name TEXT UNIQUE,
-                    enabled BOOLEAN DEFAULT TRUE
-                );
-            """))
-            for mod in modules:
-                await conn.execute(text("""
-                    INSERT INTO modules (name, enabled)
-                    VALUES (:name, TRUE)
-                    ON CONFLICT (name) DO NOTHING;
-                """), {"name": mod})
-        return "✔️ Modules seeded"
-    except Exception as e:
-        return f"❌ Failed to seed modules: {e}"
+        return f"❌ Failed to initialize schema: {e}"

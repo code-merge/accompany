@@ -1,3 +1,5 @@
+# app/core/utils/svg_utils.py
+
 from pathlib import Path
 
 def load_svg(path: Path, size: str = "w-4 h-4") -> str:

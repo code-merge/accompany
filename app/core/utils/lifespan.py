@@ -1,3 +1,5 @@
+# app/core/utils/lifespan.py
+
 from contextlib import asynccontextmanager
 from setup.compiler import compile_tailwind
 from app.core.i18n import compile_all_translations

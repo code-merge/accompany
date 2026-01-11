@@ -1,11 +1,10 @@
-{# app/modules/onboarding/ui/templates/dbsetup.html #}
-{% from "tabs.html" import tabs as render_tabs %}
+{% from "core/components/tabs.html" import tabs as render_tabs %}
 
 <div class="flex w-full h-full p-2 gap-x-4">
 
     <!-- Sidebar -->
     <div class="w-1/4 border-[var(--border)]">
-        {% include "components/sidebar.html" %}
+        {% include "modules/onboarding/ui/components/sidebar.html" %}
     </div>
 
     <!-- Main Content -->

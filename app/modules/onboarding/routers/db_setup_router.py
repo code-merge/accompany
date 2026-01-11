@@ -38,9 +38,9 @@ def _build_db_tabs(request: Request) -> list[dict[str, Any]]:
 
     return [
         {"label": "onboarding_db_type_std", "url": request.url_for("dbsetup_standard"),
-         "content": render_to_string("components/db_standard.html", request, std_ctx)},
+         "content": render_to_string("modules/onboarding/ui/components/db_standard.html", request, std_ctx)},
         {"label": "onboarding_db_type_custom",   "url": request.url_for("dbsetup_custom"),
-         "content": render_to_string("components/db_custom.html", request, cus_ctx)},
+         "content": render_to_string("modules/onboarding/ui/components/db_custom.html", request, cus_ctx)},
     ]
 
 @router.get("/db-setup", name="dbsetup", response_class=HTMLResponse)
@@ -72,7 +72,7 @@ async def dbsetup_standard(request: Request):
         "form": sm.get_form("dbsetup_standard"),
         "errors": sm.get_errors("dbsetup_standard")
     })
-    return render("components/db_standard.html", request, ctx)
+    return render("modules/onboarding/ui/components/db_standard.html", request, ctx)
 
 @router.post("/db-setup/standard")
 async def dbsetup_standard_post(request: Request, db_name: str = Form(...)):
@@ -109,7 +109,7 @@ async def dbsetup_standard_post(request: Request, db_name: str = Form(...)):
     sm.set("db_type", "standard")
 
     if errors:
-        return render("components/db_standard.html", request,
+        return render("modules/onboarding/ui/components/db_standard.html", request,
                       build_context(request, current_step=3, extra={"form": form, "errors": errors}))
 
     sm.clear_errors("dbsetup_standard")
@@ -138,7 +138,7 @@ async def dbsetup_custom(request: Request):
         "form":   sm.get_form("dbsetup_custom"),
         "errors": sm.get_errors("dbsetup_custom"),
     }
-    return render("components/db_custom.html", request, ctx)
+    return render("modules/onboarding/ui/components/db_custom.html", request, ctx)
 
 
 @router.post("/db-setup/custom")

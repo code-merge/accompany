@@ -196,6 +196,7 @@ msgstr "Industry is required"
 msgid "company_logo_type_error"
 msgstr "Allowed: .jpg .jpeg .png .gif .svg"
 
+
 # System Setup
 
 msgid "onboarding_systemsetup_title"
@@ -239,6 +240,7 @@ msgstr "Language is required"
 
 msgid "system_theme_required_error"
 msgstr "Theme is required"
+
 
 # Finish Setup
 

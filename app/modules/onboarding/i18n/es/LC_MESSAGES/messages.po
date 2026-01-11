@@ -1,0 +1,248 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Onboarding 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+# Sidebar
+
+msgid "onboarding_welcome"
+msgstr "Bienvenida"
+
+msgid "onboarding_licence"
+msgstr "Licencia"
+
+msgid "onboarding_language_theme"
+msgstr "Idioma y Tema"
+
+msgid "onboarding_database_setup"
+msgstr "Configuración de la Base de Datos"
+
+msgid "onboarding_admin_user_setup"
+msgstr "Configuración del Usuario Administrador"
+
+msgid "onboarding_company_setup"
+msgstr "Configuración de la Empresa"
+
+msgid "onboarding_system_setup"
+msgstr "Configuración del Sistema"
+
+msgid "onboarding_finish"
+msgstr "Finalizar"
+
+msgid "onboarding_welcome_desc"
+msgstr "Bienvenido a la configuración del sistema"
+
+msgid "onboarding_licence_desc"
+msgstr "Acuerdo de Licencia"
+
+msgid "onboarding_language_theme_desc"
+msgstr "Elige tu idioma preferido"
+
+msgid "onboarding_database_setup_desc"
+msgstr "Configura tu base de datos"
+
+msgid "onboarding_admin_user_setup_desc"
+msgstr "Crea tu usuario administrador"
+
+msgid "onboarding_company_setup_desc"
+msgstr "Configura los detalles de tu empresa"
+
+msgid "onboarding_system_setup_desc"
+msgstr "Ajusta el sistema a tus necesidades"
+
+msgid "onboarding_finish_desc"
+msgstr "¡Todo listo para comenzar!"
+
+# Action buttons
+
+msgid "onboarding_next_btn"
+msgstr "Siguiente"
+
+msgid "onboarding_back_btn"
+msgstr "Atrás"
+
+# Welcome Page
+
+msgid "onboarding_welcome_msg"
+msgstr "¡Bienvenido al asistente de instalación de Accompany ERP! Prepárate para transformar la gestión de tu empresa. Esta guía fácil te ayudará a configurar Accompany de forma eficiente, para que puedas disfrutar de una mayor productividad, mejor manejo de datos y decisiones más informadas."
+
+# Licence Page
+
+msgid "onboarding_licence_title"
+msgstr "Acuerdo de Licencia"
+
+msgid "onboarding_licence_accept"
+msgstr "He leído y acepto los términos de la licencia"
+
+# Database Setup
+
+msgid "onboarding_dbsetup_title"
+msgstr "Configuración de la Base de Datos"
+
+msgid "onboarding_dbsetup_desc"
+msgstr "Configura la base de datos para que Accompany funcione. Puedes crear una nueva base de datos o conectarte a una existente"
+
+msgid "onboarding_db_type_std"
+msgstr "Estándar"
+
+msgid "onboarding_db_type_custom"
+msgstr "Personalizado"
+
+msgid "db_name_input"
+msgstr "Nombre de la Base de Datos"
+
+msgid "db_host_input"
+msgstr "Servidor"
+
+msgid "db_port_input"
+msgstr "Puerto"
+
+msgid "db_user_input"
+msgstr "Usuario de la Base de Datos"
+
+msgid "db_password_input"
+msgstr "Contraseña"
+
+msgid "db_ssl_checkbox"
+msgstr "Usar SSL"
+
+msgid "db_name_ip_error"
+msgstr "El nombre de la base de datos es obligatorio"
+
+msgid "host_ip_error"
+msgstr "El servidor es obligatorio"
+
+msgid "port_ip_error"
+msgstr "El puerto debe ser válido"
+
+msgid "user_ip_error"
+msgstr "El usuario es obligatorio"
+
+msgid "password_ip_error"
+msgstr "La contraseña es obligatoria"
+
+msgid "ssl_cert_ip_error"
+msgstr "Se requiere un certificado SSL"
+
+msgid "ssl_cert_type_error"
+msgstr "Solo se permiten archivos de certificado .pem"
+
+# Admin User Setup
+
+msgid "onboarding_usersetup_title"
+msgstr "Configuración del Usuario Administrador"
+
+msgid "onboarding_usersetup_desc"
+msgstr "Configura el usuario administrador para Accompany"
+
+msgid "admin_setup_name_input"
+msgstr "Nombre Completo"
+
+msgid "admin_setup_email_input"
+msgstr "Correo Electrónico"
+
+msgid "admin_setup_password_input"
+msgstr "Contraseña"
+
+msgid "admin_setup_con_password_input"
+msgstr "Confirmar Contraseña"
+
+msgid "admin_setup_prof_pic_input"
+msgstr "Foto de Perfil (Opcional)"
+
+msgid "admin_full_name_error"
+msgstr "El nombre completo es obligatorio"
+
+msgid "admin_email_required_error"
+msgstr "El correo electrónico es obligatorio"
+
+msgid "admin_email_invalid_error"
+msgstr "Introduce una dirección de correo válida"
+
+msgid "admin_password_length_error"
+msgstr "La contraseña debe tener al menos 8 caracteres"
+
+msgid "admin_password_match_error"
+msgstr "Las contraseñas no coinciden"
+
+msgid "admin_profile_picture_type_error"
+msgstr "Permitido: .jpg .jpeg .png .gif"
+
+# Company Setup
+
+msgid "onboarding_companysetup_title"
+msgstr "Configuración de la Empresa"
+
+msgid "onboarding_companysetup_desc"
+msgstr "Configura los datos organizacionales"
+
+msgid "company_name_input"
+msgstr "Nombre de la Empresa"
+
+msgid "company_industry_input"
+msgstr "Industria"
+
+msgid "company_logo_input"
+msgstr "Logo de la Empresa (opcional)"
+
+msgid "company_name_required_error"
+msgstr "El nombre de la empresa es obligatorio"
+
+msgid "industry_required_error"
+msgstr "La industria es obligatoria"
+
+msgid "company_logo_type_error"
+msgstr "Permitido: .jpg .jpeg .png .gif .svg"
+
+# System Setup
+
+msgid "onboarding_systemsetup_title"
+msgstr "Configuración del Sistema"
+
+msgid "onboarding_systemsetup_desc"
+msgstr "Configura el sistema según tus necesidades"
+
+msgid "system_country_input"
+msgstr "País"
+
+msgid "system_currency_input"
+msgstr "Moneda"
+
+msgid "system_timezone_input"
+msgstr "Zona Horaria"
+
+msgid "system_language_input"
+msgstr "Idioma del Sistema"
+
+msgid "system_theme_input"
+msgstr "Tema del Sistema"
+
+msgid "system_modules_input"
+msgstr "Módulos Iniciales"
+
+msgid "system_modules_select"
+msgstr "Seleccionar módulos…"
+
+msgid "system_country_required_error"
+msgstr "El país es obligatorio"
+
+msgid "system_currency_required_error"
+msgstr "La moneda es obligatoria"
+
+msgid "system_timezone_required_error"
+msgstr "La zona horaria es obligatoria"
+
+msgid "system_language_required_error"
+msgstr "El idioma es obligatorio"
+
+msgid "system_theme_required_error"
+msgstr "El tema es obligatorio"
+
+# Finish Setup
+
+msgid "onboarding_finish_title"
+msgstr "Finalizando..."
+
+msgid "onboarding_review_text"
+msgstr "Revisar y Confirmar"

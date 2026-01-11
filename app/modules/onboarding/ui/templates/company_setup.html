@@ -1,13 +1,13 @@
-{% from "input.html" import input %}
-{% from "button.html" import button %}
-{% from "select.html" import select %}
+{% from "core/components/button.html" import button %}
+{% from "core/components/input.html" import input %}
+{% from "core/components/select.html" import select %}
 
 
 <div class="flex w-full h-full p-2 gap-x-4">
 
   <!-- Sidebar -->
   <div class="w-1/4 border-[var(--border)]">
-    {% include "components/sidebar.html" %}
+    {% include "modules/onboarding/ui/components/sidebar.html" %}
   </div>
 
   <!-- Main Content -->
@@ -61,7 +61,8 @@
 
               <!-- Industry dropdown -->
               <div>
-                {{ select("industry", "company_industry_input", required=true, value=form.industry, error=errors.industry,
+                {{ select("industry", "company_industry_input", required=true, value=form.industry,
+                error=errors.industry,
                 options=industry_options, attrs={
                 'x-model': 'form.industry',
                 'x-on:input': 'errors.industry = null',

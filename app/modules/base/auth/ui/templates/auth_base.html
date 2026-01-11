@@ -1,0 +1,22 @@
+{% extends "core/templates/base.html" %}
+
+{% block content %}
+<div class="bg-[var(--muted-foreground)]/20 min-h-screen flex items-center justify-center">
+  <button @click="dark = !dark; localStorage.theme = dark?'dark':'light'" class="btn-ghost absolute top-4 right-4">
+    Toggle Dark
+  </button>
+
+  <div class="w-full max-w-md p-8 bg-[var(--card)] rounded-lg shadow-lg border border-[var(--border)]">
+    <div id="auth-shell">
+      {% if content_template %}
+        {% include content_template %}
+      {% else %}
+        {% block auth_shell_content %}{% endblock %}
+      {% endif %}
+    </div>
+    <div class="mt-6">
+      {% include "modules/onboarding/ui/components/footer.html" %}
+    </div>
+  </div>
+</div>
+{% endblock %}

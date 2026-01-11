@@ -1,4 +1,4 @@
-from app.tests.conftest import client  # Explicitly import the client fixture
+from app.conftest import client  # Explicitly import the client fixture
 
 def test_welcome_page(client):
     """

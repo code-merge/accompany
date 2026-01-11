@@ -1,0 +1,23 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Authentication 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: es\n"
+
+msgid "login_heading"
+msgstr "Iniciar sesión en Accompany"
+
+msgid "email_label"
+msgstr "Correo electrónico"
+
+msgid "email_placeholder"
+msgstr "Introduce tu correo electrónico"
+
+msgid "password_label"
+msgstr "Contraseña"
+
+msgid "password_placeholder"
+msgstr "Introduce tu contraseña"
+
+msgid "login_btn"
+msgstr "Iniciar sesión"

@@ -61,6 +61,7 @@ def build_context(request, current_step, extra=None):
     - Used across route handlers to pass data to Jinja templates.
     """
     locale, theme = get_locale_and_theme(request)
+    print(locale)
     context = {
         "request": request,
         "steps": steps,

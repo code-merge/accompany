@@ -14,7 +14,7 @@ from app.modules.onboarding.models.system_info_model import SystemData
 
 router = APIRouter()
 
-data_file      = Path(settings.MODULE_DATA_DIRS[0]) / "data.json"
+data_file      = settings.MODULES_DIR / "onboarding" / "data" / "data.json"
 raw_countries  = json.loads(data_file.read_text(encoding="utf-8"))
 
 COUNTRY_OPTIONS = [

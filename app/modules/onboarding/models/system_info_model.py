@@ -1,3 +1,5 @@
+# app/modules/onboarding/models/system_model.py
+
 from pydantic import BaseModel, field_validator
 from app.modules.onboarding.data.constants import LANGUAGES, THEMES
 from .validators import not_blank

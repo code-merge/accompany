@@ -7,10 +7,20 @@
     <title>Accompay</title>
     <meta name="description" content="An Opensource ERP" />
 
+    <!-- Enable the local when all the Ui development is done. Generate the classes and then enable it. Check the stable versions for the production release -->
+
     <link rel="stylesheet" href="{{ url_for('static', path='css/app.css') }}" />
     <link rel="icon" href="{{ url_for('static', path='favicon/icon.ico') }}" />
     <script src="{{ url_for('libs', path='htmx.min.js') }}"></script>
     <script defer src="{{ url_for('libs', path='alpinejs.min.js') }}"></script>
+
+
+    <!-- CDNs for various dependencies -->
+
+    <!-- <script src="https://unpkg.com/htmx.org@1.9.2"></script> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@1.14.2/dist/full.css" rel="stylesheet"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script> -->
 
 </head>
 

@@ -1,5 +1,5 @@
-from fastapi import Request
 from typing import Optional, TypeVar
+from fastapi import Request
 
 DEFAULT_LOCALE = "en"
 DEFAULT_THEME = "light"

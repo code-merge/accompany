@@ -1,3 +1,5 @@
+# app/core/i18n/locale.py
+
 import polib
 import logging
 import gettext
@@ -12,10 +14,10 @@ def compile_translations(i18n_root: Path) -> None:
     """
     Compiles all .po translation files to .mo files within the given i18n root directory.
 
-    This function iterates over each locale directory inside the specified i18n_root,
-    searches for .po files in the LC_MESSAGES subdirectory, and compiles them into
-    binary .mo files using polib. If the i18n_root does not exist, a warning is logged.
-    Any errors encountered during compilation are logged as errors.
+    This function recursively searches for .po files in any LC_MESSAGES subdirectory
+    under the specified i18n_root, and compiles them into binary .mo files using polib.
+    If the i18n_root does not exist, a warning is logged. Any errors encountered during
+    compilation are logged as errors.
 
     Args:
         i18n_root (Path): The root directory containing locale subdirectories with translation files.
@@ -28,15 +30,9 @@ def compile_translations(i18n_root: Path) -> None:
         logger.warning(f"[i18n] No i18n directory found at {i18n_root}")
         return
 
-    for locale_dir in i18n_root.iterdir():
-        if not locale_dir.is_dir():
-            continue
-
-        po_path = locale_dir / "LC_MESSAGES" / f"{DOMAIN}.po"
+    # Recursively find all messages.po files under LC_MESSAGES
+    for po_path in i18n_root.rglob("LC_MESSAGES/messages.po"):
         mo_path = po_path.with_suffix(".mo")
-
-        if not po_path.exists():
-            continue
 
         try:
             po = polib.pofile(str(po_path))
@@ -45,6 +41,7 @@ def compile_translations(i18n_root: Path) -> None:
             logger.info(f"[i18n] Compiled {po_path} → {mo_path}")
         except Exception as e:
             logger.error(f"[i18n] Error compiling {po_path}: {e}")
+
 
 
 def get_translations(i18n_root: Path, locale: str) -> Callable[[str], str]:

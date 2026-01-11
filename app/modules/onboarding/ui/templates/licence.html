@@ -1,5 +1,5 @@
-{% from "button.html" import button %}
-{% from "input.html" import input %}
+{% from "core/components/button.html" import button %}
+{% from "core/components/input.html" import input %}
 
 <div class="flex w-full h-full p-2 gap-x-4" x-data='{
   accepted: {{ "true" if accepted else "false" }},
@@ -8,7 +8,7 @@
 
     <!-- Sidebar -->
     <div class="w-1/4 border-[var(--border)]">
-        {% include "components/sidebar.html" %}
+        {% include "modules/onboarding/ui/components/sidebar.html" %}
     </div>
 
     <!-- Main Content -->
